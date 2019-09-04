@@ -16,14 +16,14 @@ end = datetime.datetime(2019, 8, 30)
 df = web.DataReader("NFLX", 'yahoo', start, end)
 
 
-forecast_out = int(200) # predicting 30 days into future
-df['Prediction'] = df[['Adj Close']].shift(-forecast_out) #  label column with data shifted 30 units up
+forecast_out = int(200) # predicting 200 days into future
+df['Prediction'] = df[['Adj Close']].shift(-forecast_out) #  label column with data shifted 200 units up
 
 x = np.array(df.drop(['Prediction'], 1))
 x = preprocessing.scale(x)
 
-x_forecast = x[-forecast_out:] # set x_forecast equal to last 30
-x = x[:-forecast_out] # remove last 30 from x
+x_forecast = x[-forecast_out:] # set x_forecast equal to last 200
+x = x[:-forecast_out] # remove last 200 from x
 y = np.array(df['Prediction'])
 y = y[:-forecast_out]
 
